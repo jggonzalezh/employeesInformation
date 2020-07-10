@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EmployeesInfo.DAL
+namespace EmployeesInfo.BL
 {
-    public interface IEmployeeRepository
+    public interface IEmployeeService
     {
-
-        Task<List<Employee>> GetEmployessAsync();
+        Task<List<Employee>> GetEmployeesAsync();
 
     }
 }

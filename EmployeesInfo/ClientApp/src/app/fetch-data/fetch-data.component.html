@@ -1,8 +1,18 @@
 <h1>Employees Information</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+
+<form  [formGroup]="employeesForm"  (ngSubmit)="onSubmit()"   >
+
+  <div class="input-group mb-3">
+    <input type="number"   formControlName="employeeId"  class="form-control" placeholder="Employee Id">
+    <div class="input-group-append"   >
+      <button  type="submit" class="input-group-text">Get Employees</button>
+    </div>
+  </div>
+</form>
 
 <p *ngIf="!employees"><em>Loading...</em></p>
+<p *ngIf="notfound"><em>there is no employee with the  id {{employeeId.value}}</em></p>
 
 <table class='table table-striped' *ngIf="employees">
   <thead>
@@ -10,7 +20,7 @@
       <th>Name</th>
       <th>Contract Type</th>
       <th>Role</th>
-
+      <th>Annual Salary</th>
     </tr>
   </thead>
   <tbody>
@@ -18,6 +28,7 @@
       <td>{{ employee.name }}</td>
       <td>{{ employee.contractTypeName }}</td>
       <td>{{ employee.roleName }}</td>
+      <td>{{ employee.annualSalary | currency }}</td>
     </tr>
   </tbody>
 </table>

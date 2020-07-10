@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EmployeesInfo.BL;
 using EmployeesInfo.DAL;
 using EmployeesInfo.Models;
 using Microsoft.AspNetCore.Http;
@@ -14,11 +15,11 @@ namespace EmployeesInfo.Controllers
     public class EmployessController : ControllerBase
     {
 
-        private readonly IEmployeeRepository employeeRepository;
+        private readonly IEmployeeService employeeService;
 
-        public EmployessController(IEmployeeRepository employeeRepository)
+        public EmployessController(IEmployeeService employeeService)
         {
-            this.employeeRepository = employeeRepository;
+            this.employeeService = employeeService;
         }
 
 
@@ -28,22 +29,24 @@ namespace EmployeesInfo.Controllers
 
         //public async Task<List<Employee>>  Get()
         {
-            return await employeeRepository.GetUserAsync();
+            return await employeeService.GetEmployeesAsync();
         }
 
         // GET: api/Employess/5
         [HttpGet("{id}", Name = "Get")]
-        public async Task<ActionResult<Employee>> Get(int id)
+        public async Task<ActionResult<List<Employee>>> Get(int id)
         {
 
-            var employees = await employeeRepository.GetUserAsync();
-
+            List<Employee> employees = await employeeService.GetEmployeesAsync();
+            List<Employee> employeesConcrete = new List<Employee>();
             var employee = employees.FirstOrDefault(e => e.id == id);
             if (employee == null)
             {
                 return NotFound();
             }
-            return Ok(employee);
+            employeesConcrete.Add(employee);
+
+            return Ok(employeesConcrete);
 
 
         }

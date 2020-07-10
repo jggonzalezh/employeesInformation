@@ -15,6 +15,7 @@ namespace EmployeesInfo.Models
         public string roleDescription { get; set; }
         public double hourlySalary { get; set; }
         public double monthlySalary { get; set; }
+        public double annualSalary { get; set; }
 
     }
 }

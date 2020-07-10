@@ -15,7 +15,7 @@ namespace EmployeesInfo.DAL
         private static string url = "http://masglobaltestapi.azurewebsites.net/api/Employees";
 
 
-        public async Task<List<Employee>> GetUserAsync()
+        public async Task<List<Employee>> GetEmployessAsync()
         {
             var employeesJson = await GetStringAsync(url);
 
