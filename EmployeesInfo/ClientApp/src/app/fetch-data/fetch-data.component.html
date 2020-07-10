@@ -1,0 +1,23 @@
+<h1>Employees Information</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!employees"><em>Loading...</em></p>
+
+<table class='table table-striped' *ngIf="employees">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Contract Type</th>
+      <th>Role</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of employees">
+      <td>{{ employee.name }}</td>
+      <td>{{ employee.contractTypeName }}</td>
+      <td>{{ employee.roleName }}</td>
+    </tr>
+  </tbody>
+</table>
