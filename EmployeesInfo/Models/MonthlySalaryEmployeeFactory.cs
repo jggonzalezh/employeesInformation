@@ -10,7 +10,7 @@ namespace EmployeesInfo.Models
 
         public override Employee CreateEmployees(Employee e, double annualSalary)
         {
-            return new HourlySalaryEmployee(e, annualSalary);
+            return new MonthlySalaryEmployee(e, annualSalary);
         }
     }
 }

@@ -66,7 +66,7 @@ namespace EmployeesInfo.BL
             if (String.Equals(e.contractTypeName, ContractTypeName.MonthlySalaryEmployee.ToString()))
             {
                 annualSalary = calculatedMonthlySalaryEmployeeAnnualSalary(e);
-                return monthlySalaryEmployeeFactory.CreateEmployees(e, e.monthlySalary );
+                return monthlySalaryEmployeeFactory.CreateEmployees(e, annualSalary);
             }
 
             return null;
