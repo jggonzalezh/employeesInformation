@@ -10,7 +10,7 @@ namespace EmployeesInfo.Models
 
         public MonthlySalaryEmployee(Employee e, double annualSalary)
         {
-            contractTypeName = ContractTypeName.HourlySalaryEmployee.ToString();
+            contractTypeName = ContractTypeName.MonthlySalaryEmployee.ToString();
             this.id = e.id;
             this.name = e.name;
             this.roleId = e.roleId;
