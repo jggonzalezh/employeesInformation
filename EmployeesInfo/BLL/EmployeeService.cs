@@ -12,7 +12,7 @@ namespace EmployeesInfo.BL
     {
 
         public const int numberOfMonthsInAYear = 12;
-        public const int hoursWorkedPerMonth = 12;
+        public const int hoursWorkedPerMonth = 120;
 
         private readonly IEmployeeRepository employeeRepository;
 
@@ -66,7 +66,7 @@ namespace EmployeesInfo.BL
             if (String.Equals(e.contractTypeName, ContractTypeName.MonthlySalaryEmployee.ToString()))
             {
                 annualSalary = calculatedMonthlySalaryEmployeeAnnualSalary(e);
-                return monthlySalaryEmployeeFactory.CreateEmployees(e, e.monthlySalary * numberOfMonthsInAYear);
+                return monthlySalaryEmployeeFactory.CreateEmployees(e, e.monthlySalary );
             }
 
             return null;
