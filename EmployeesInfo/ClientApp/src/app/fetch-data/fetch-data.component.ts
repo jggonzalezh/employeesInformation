@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
+import { FetchDataService , Employee } from './fetch-data.service';
 
 @Component({
   selector: 'app-fetch-data',
@@ -10,15 +11,16 @@ export class FetchDataComponent {
 
   public employees: Employee[];
   baseUrl;
-  notfound: boolean = false;
-
+  notfound = false;
+  showloading = false;
 
    employeesForm = this.fb.group({
     employeeId: [''],
   });
 
-  constructor(private fb: FormBuilder, private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    this.baseUrl = baseUrl;
+  constructor(
+               private fb: FormBuilder, private fetchDataService: FetchDataService
+              ) {
   }
 
   onSubmit() {
@@ -31,18 +33,20 @@ export class FetchDataComponent {
   }
 
     getEmployees() {
-
-      this.http.get<Employee[]>(this.baseUrl + 'api/Employess').subscribe(result => {
+      this.showloading = true;
+      this.fetchDataService.getEmployees().subscribe(result => {
         this.employees = result;
+        this.showloading = false;
         this.employeeId.setValue('');
         this.notfound = false;
       }, error => console.error(error));
   }
 
   getEmployeById( id: string) {
-
-    this.http.get<Employee[]>(this.baseUrl + 'api/Employess/'+id).subscribe(result => {
+    this.showloading = true;
+    this.fetchDataService.getEmployeById(id).subscribe(result => {
       this.employees = result;
+      this.showloading = false;
       this.employeeId.setValue('');
       this.notfound = false;
     }, error => {
@@ -50,7 +54,7 @@ export class FetchDataComponent {
           this.notfound = true;
           this.employees = [];
         }
-      console.error(error)
+      console.error(error);
     }
     );
   }
@@ -62,19 +66,5 @@ export class FetchDataComponent {
     return this.employeesForm.get('employeeId');
   }
 
-
-}
-
-interface Employee {
-
-  id: number;
-  name: string;
-  contractTypeName: string;
-  roleId: number;
-  roleName: string;
-  roleDescription: string;
-  hourlySalary: number;
-  monthlySalary: number;
-  annualSalary: number;
 
 }

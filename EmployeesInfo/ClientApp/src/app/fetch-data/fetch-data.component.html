@@ -11,7 +11,7 @@
   </div>
 </form>
 
-<p *ngIf="!employees"><em>Loading...</em></p>
+<p *ngIf="!employees && showloading"><em>Loading...</em></p>
 <p *ngIf="notfound"><em>there is no employee with the  id {{employeeId.value}}</em></p>
 
 <table class='table table-striped' *ngIf="employees">
